@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: be-todo
+    env: docker
+    dockerfilePath: ./backend/Dockerfile
+    envVars:
+      - key: DB_HOST
+        value: dpg-d7nose2qqhas7381vaj0-a.singapore-postgres.render.com
+      - key: DB_PORT
+        value: 5432
+      - key: DB_NAME
+        value: todo_db_55ct
+      - key: DB_USER
+        value: todo_db_55ct_user
+      - key: DB_PASSWORD
+        value: Wyvovcc6VZLZf0H0lDmirHVIeYz6QpNF
+      - key: PORT
+        value: 5000
+      - key: DB_SSL
+        value: true
+
+  - type: web
+    name: fe-todo
+    env: docker
+    dockerfilePath: ./frontend/Dockerfile
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://be-todo.onrender.com
