@@ -1,28 +1,38 @@
 services:
+  # ─────────────────────────────────────────
+  # Backend Service
+  # ─────────────────────────────────────────
   - type: web
     name: be-todo
-    env: docker
+    runtime: docker
     dockerfilePath: ./backend/Dockerfile
     envVars:
       - key: DB_HOST
-        value: dpg-d7nose2qqhas7381vaj0-a.singapore-postgres.render.com
-      - key: DB_PORT
-        value: 5432
-      - key: DB_NAME
-        value: todo_db_55ct
+        value: your-render-db-host # Replace with your Render PostgreSQL host
       - key: DB_USER
-        value: todo_db_55ct_user
+        value: your-render-db-user # Replace with your Render PostgreSQL user
       - key: DB_PASSWORD
-        value: Wyvovcc6VZLZf0H0lDmirHVIeYz6QpNF
+        value: your-render-db-password # Replace with your Render PostgreSQL password
+      - key: DB_NAME
+        value: your-render-db-name # Replace with your Render PostgreSQL database name
       - key: PORT
         value: 5000
-      - key: DB_SSL
-        value: true
 
+  # ─────────────────────────────────────────
+  # Frontend Service
+  # ─────────────────────────────────────────
   - type: web
     name: fe-todo
-    env: docker
+    runtime: docker
     dockerfilePath: ./frontend/Dockerfile
     envVars:
       - key: REACT_APP_API_URL
-        value: https://be-todo.onrender.com
+        value: https://be-todo.onrender.com # Must match the backend service name above
+
+  # ─────────────────────────────────────────
+  # PostgreSQL Database
+  # ─────────────────────────────────────────
+databases:
+  - name: todo-db
+    databaseName: todo
+    user: todo_user
