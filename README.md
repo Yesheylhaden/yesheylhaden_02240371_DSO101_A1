@@ -44,7 +44,7 @@ PORT=5000
 The frontend was configured with:
 
 ```env
-REACT_APP_API_URL=https://be-todo.onrender.com
+REACT_APP_API_URL=https://be-todo-02240371.onrender.com
 ```
 
 > `.env` was added to `.gitignore` to ensure credentials were never committed to the repository.

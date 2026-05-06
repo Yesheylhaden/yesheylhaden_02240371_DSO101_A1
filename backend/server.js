@@ -86,6 +86,19 @@ const initDB = async () => {
 const taskRoutes = require('./routes/tasks');
 app.use('/api/tasks', taskRoutes(pool));
 
+// ✅ Root route
+app.get('/', (req, res) => {
+    res.status(200).json({
+        status: 'OK',
+        message: 'Todo API Server',
+        version: '1.0.0',
+        endpoints: {
+            tasks: '/api/tasks',
+            health: '/health'
+        }
+    });
+});
+
 // ✅ Health check
 app.get('/health', (req, res) => {
     res.status(200).json({
