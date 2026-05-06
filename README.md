@@ -281,7 +281,6 @@ databases:
 2. The Render platform picks up the new update because it is linked to the GitHub integration.
 3. The Render system creates a new Docker image by using the `Dockerfile` in the service folders.
 4. This image replaces the old one and gets deployed without any additional steps on your part.
-
 The fact that each update in the GitHub repository leads to a new build and deploy is very convenient.
 ---
 
