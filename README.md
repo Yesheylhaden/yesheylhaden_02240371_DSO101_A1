@@ -53,7 +53,7 @@ The application was tested locally before proceeding to deployment. The backend 
 
 **Screenshot: Backend running locally and connected to PostgreSQL**
 
-![Backend logs showing server running and PostgreSQL connected](backend_logs.png)
+![Backend logs showing server running and PostgreSQL connected](/Images/backend_logs.png)
 
 ---
 
@@ -84,7 +84,7 @@ docker build -t yehsey/be-todo:02240371 .
 
 **Screenshot: Backend Docker image build — FINISHED**
 
-![Backend docker build finished successfully](be_push.png)
+![Backend docker build finished successfully](/Images/be_build.png)
 
 The image was then pushed to Docker Hub:
 
@@ -94,7 +94,7 @@ docker push yehsey/be-todo:02240371
 
 **Screenshot: Backend image pushed to Docker Hub**
 
-![Backend image pushed successfully with digest](be_push.png)
+![Backend image pushed successfully with digest](/Images/be_push.png)
 
 ---
 
@@ -108,7 +108,7 @@ docker build -t yehsey/fe-todo:02240371 .
 
 **Screenshot: Frontend Docker image build — FINISHED**
 
-![Frontend docker build finished with 16 steps](fe_build.png)
+![Frontend docker build finished with 16 steps](/Images/fe_build.png)
 
 The frontend image was then pushed:
 
@@ -118,7 +118,7 @@ docker push yehsey/fe-todo:02240371
 
 **Screenshot: Frontend image pushed to Docker Hub**
 
-![Frontend image pushed successfully with digest](fe_push.png)
+![Frontend image pushed successfully with digest](/Images/fe_push.png)
 
 ---
 
@@ -128,7 +128,7 @@ Both images were successfully pushed and are publicly visible under the `yehsey`
 
 **Screenshot: Docker Hub showing both repositories**
 
-![Docker Hub showing yehsey/fe-todo and yehsey/be-todo repositories](dockerhub_repos.png)
+![Docker Hub showing yehsey/fe-todo and yehsey/be-todo repositories](/Images/dockerhub_repos.png)
 
 ---
 
@@ -146,7 +146,7 @@ A managed PostgreSQL database was created on Render with the following configura
 
 **Screenshot: Creating a new PostgreSQL database on Render**
 
-![New Postgres form on Render with name todo-db and database todos](new_postgres.jpeg)
+![New Postgres form on Render with name todo-db and database todos](/Images/new_postgres.jpeg)
 
 After creation, the connection credentials were retrieved from the Render PostgreSQL dashboard:
 
@@ -158,7 +158,7 @@ After creation, the connection credentials were retrieved from the Render Postgr
 
 **Screenshot: Render PostgreSQL connection credentials**
 
-![Render database connection details showing hostname, port, database, username and password](db_credentials.png)
+![Render database connection details showing hostname, port, database, username and password](/Images/db_credentials.png)
 
 ---
 
@@ -183,11 +183,11 @@ The following environment variables were configured for the backend service:
 
 **Screenshot: Backend environment variables on Render**
 
-![Backend environment variables showing DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_SSL, DB_USER and PORT](be_env_vars.png)
+![Backend environment variables showing DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_SSL, DB_USER and PORT](/Images/be_env_vars.png)
 
 **Screenshot: Backend service deployed successfully on Render**
 
-![Render backend service dashboard showing be-todo:02240371 with Deploy live status](render_be_deploy.png)
+![Render backend service dashboard showing be-todo:02240371 with Deploy live status](/Images/render_be_deploy.png)
 
 ---
 
@@ -206,11 +206,11 @@ The following environment variable was configured:
 
 **Screenshot: Frontend environment variable on Render**
 
-![Frontend environment variables showing REACT_APP_API_URL pointing to the live backend URL](fe_env_vars.png)
+![Frontend environment variables showing REACT_APP_API_URL pointing to the live backend URL](/Images/fe_env_vars.png)
 
 **Screenshot: Frontend service deployed successfully on Render**
 
-![Render frontend service dashboard showing fe-todo:02240371 with Deploy live status](render_fe_deploy.png)
+![Render frontend service dashboard showing fe-todo:02240371 with Deploy live status](/Images/render_fe_deploy.png)
 
 ---
 
@@ -277,26 +277,15 @@ databases:
 
 ### How Automated Deployment Works
 
-1. Code changes are pushed to the GitHub repository.
-2. Render detects the new commit via the connected GitHub integration.
-3. Render automatically builds a new Docker image from the `Dockerfile` in each service directory.
-4. The newly built image is deployed, replacing the previous version with zero manual steps.
+1. The code updates get committed to the GitHub repository.
+2. The Render platform picks up the new update because it is linked to the GitHub integration.
+3. The Render system creates a new Docker image by using the `Dockerfile` in the service folders.
+4. This image replaces the old one and gets deployed without any additional steps on your part.
 
-This means every `git push` to the main branch triggers a fresh build and redeploy of both the frontend and backend services automatically.
-
+The fact that each update in the GitHub repository leads to a new build and deploy is very convenient.
 ---
 
-## Summary
-
-| Task | Status |
-|---|---|
-| Todo app built (FE + BE + DB) | ✅ Complete |
-| `.env` configured and `.gitignore` set | ✅ Complete |
-| Backend Docker image built & tagged with student ID | ✅ Complete |
-| Frontend Docker image built & tagged with student ID | ✅ Complete |
-| Both images pushed to Docker Hub | ✅ Complete |
-| Render PostgreSQL database created | ✅ Complete |
-| Backend deployed on Render with env vars | ✅ Complete |
-| Frontend deployed on Render with env vars | ✅ Complete |
-| `render.yaml` blueprint configured | ✅ Complete |
-| GitHub connected for automated deployment (Part B) | ✅ Complete |
+## Conclusion
+The current assignment gave hands-on experience in building containers for full-stack web applications with Docker and deploying them on Render.com. The process of developing the Todo application from scratch and moving from image deployment in Part A to CI/CD deployment in Part B was enlightening in terms of real-world deployment processes.
+The application was run using Docker to ensure consistency, while the blueprints setup with the render.yaml file showed how automatic deployments could be carried out for multi-service deployment with each git push. Also, the use of environment variables during deployment emphasized the need for secure handling of credentials in any project.
+In general, this assignment gave insight into both local and production deployment of applications.
