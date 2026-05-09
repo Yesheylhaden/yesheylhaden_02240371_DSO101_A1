@@ -7,8 +7,8 @@ pipeline {
 
     environment {
         DOCKERHUB_USERNAME = 'yehsey'
-        BACKEND_IMAGE = 'todo-backend'
-        FRONTEND_IMAGE = 'todo-frontend'
+        BACKEND_IMAGE = 'be-todo'
+        FRONTEND_IMAGE = 'fe-todo'
         DOCKER_HOST = 'unix:///Users/mac/.docker/run/docker.sock'
         DOCKER_CONFIG = '/Users/mac/.docker'
     }
