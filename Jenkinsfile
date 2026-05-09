@@ -10,6 +10,7 @@ pipeline {
         BACKEND_IMAGE = 'todo-backend'
         FRONTEND_IMAGE = 'todo-frontend'
         DOCKER_HOST = 'unix:///Users/mac/.docker/run/docker.sock'
+        DOCKER_CONFIG = '/Users/mac/.docker'
     }
 
     stages {
@@ -62,13 +63,13 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker images...'
-                    sh '/usr/local/bin/docker build -t yehsey/todo-backend:latest ./backend'
-                    sh '/usr/local/bin/docker build -t yehsey/todo-frontend:latest ./frontend'
+                    sh 'DOCKER_CONFIG=/Users/mac/.docker /usr/local/bin/docker build -t yehsey/todo-backend:latest ./backend'
+                    sh 'DOCKER_CONFIG=/Users/mac/.docker /usr/local/bin/docker build -t yehsey/todo-frontend:latest ./frontend'
                     echo 'Pushing to Docker Hub...'
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                        sh '/usr/local/bin/docker login -u $DOCKER_USER -p $DOCKER_PASS'
-                        sh '/usr/local/bin/docker push yehsey/todo-backend:latest'
-                        sh '/usr/local/bin/docker push yehsey/todo-frontend:latest'
+                        sh 'DOCKER_CONFIG=/Users/mac/.docker /usr/local/bin/docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                        sh 'DOCKER_CONFIG=/Users/mac/.docker /usr/local/bin/docker push yehsey/todo-backend:latest'
+                        sh 'DOCKER_CONFIG=/Users/mac/.docker /usr/local/bin/docker push yehsey/todo-frontend:latest'
                     }
                 }
             }
