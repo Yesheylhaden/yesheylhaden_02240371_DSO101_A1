@@ -9,7 +9,6 @@ pipeline {
         DOCKERHUB_USERNAME = 'yehsey'
         BACKEND_IMAGE = 'todo-backend'
         FRONTEND_IMAGE = 'todo-frontend'
-        PATH = "/usr/local/bin:${env.PATH}"
     }
 
     stages {
@@ -23,7 +22,6 @@ pipeline {
 
         stage('Install Backend') {
             steps {
-                echo 'Installing backend dependencies...'
                 dir('backend') {
                     sh 'npm install'
                 }
@@ -32,7 +30,6 @@ pipeline {
 
         stage('Install Frontend') {
             steps {
-                echo 'Installing frontend dependencies...'
                 dir('frontend') {
                     sh 'npm install'
                 }
@@ -41,7 +38,6 @@ pipeline {
 
         stage('Build Frontend') {
             steps {
-                echo 'Building React frontend...'
                 dir('frontend') {
                     sh 'npm run build'
                 }
@@ -50,7 +46,6 @@ pipeline {
 
         stage('Test Backend') {
             steps {
-                echo 'Running backend tests...'
                 dir('backend') {
                     sh 'npm test'
                 }
@@ -66,18 +61,13 @@ pipeline {
             steps {
                 script {
                     echo 'Building Docker images...'
-                    def backendImage = docker.build(
-                        "${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:latest",
-                        "./backend"
-                    )
-                    def frontendImage = docker.build(
-                        "${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:latest",
-                        "./frontend"
-                    )
+                    sh '/usr/local/bin/docker build -t yehsey/todo-backend:latest ./backend'
+                    sh '/usr/local/bin/docker build -t yehsey/todo-frontend:latest ./frontend'
                     echo 'Pushing to Docker Hub...'
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-creds') {
-                        backendImage.push('latest')
-                        frontendImage.push('latest')
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        sh '/usr/local/bin/docker login -u $DOCKER_USER -p $DOCKER_PASS'
+                        sh '/usr/local/bin/docker push yehsey/todo-backend:latest'
+                        sh '/usr/local/bin/docker push yehsey/todo-frontend:latest'
                     }
                 }
             }
