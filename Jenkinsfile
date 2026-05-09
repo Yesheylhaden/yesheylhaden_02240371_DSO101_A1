@@ -9,6 +9,7 @@ pipeline {
         DOCKERHUB_USERNAME = 'yehsey'
         BACKEND_IMAGE = 'todo-backend'
         FRONTEND_IMAGE = 'todo-frontend'
+        DOCKER_HOST = 'unix:///Users/mac/.docker/run/docker.sock'
     }
 
     stages {
