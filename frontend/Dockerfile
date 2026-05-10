@@ -1,10 +1,8 @@
-FROM node:18-alpine AS build
+FROM node:20-alpine as build
 WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-ARG REACT_APP_API_URL=https://be-todo.onrender.com
-ENV REACT_APP_API_URL=$REACT_APP_API_URL
 RUN npm run build
 
 FROM nginx:alpine
