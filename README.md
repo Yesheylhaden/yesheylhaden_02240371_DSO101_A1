@@ -287,4 +287,4 @@ The fact that each update in the GitHub repository leads to a new build and depl
 ## Conclusion
 The current assignment gave hands-on experience in building containers for full-stack web applications with Docker and deploying them on Render.com. The process of developing the Todo application from scratch and moving from image deployment in Part A to CI/CD deployment in Part B was enlightening in terms of real-world deployment processes.
 The application was run using Docker to ensure consistency, while the blueprints setup with the render.yaml file showed how automatic deployments could be carried out for multi-service deployment with each git push. Also, the use of environment variables during deployment emphasized the need for secure handling of credentials in any project.
-In general, this assignment gave insight into both local and production deployment of applications.
+In general, this assignment gave insight into both local and production deployment of applications.# CI/CD Pipeline
