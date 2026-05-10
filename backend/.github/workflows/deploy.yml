@@ -9,18 +9,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Checkout the code
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. Login to DockerHub
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 3. Build and Push Docker Image (linux/amd64 for Render)
       - name: Build and Push Docker Image
         run: |
           docker buildx create --use
@@ -29,7 +26,6 @@ jobs:
             --push \
             ./backend
 
-      # 4. Trigger Render Redeployment
       - name: Trigger Render Deployment
         run: |
           curl -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}"
